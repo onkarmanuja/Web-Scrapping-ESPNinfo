@@ -5,7 +5,7 @@ let fs = require("fs");
 let path = require("path");
 
 request(url,cb);
-let directoryPath = path.join("C:\\Users\\onkar\\OneDrive\\Desktop\\web d pep\\web scrapping espncricinfo\\activity","IPL");
+let directoryPath = path.join("C:\\Users\\onkar\\OneDrive\\Desktop\\web d pep\\web scrapping espncricinfo\\ACTIVITY 3","IPL");
 function cb(error,response,html){
     if(error){
         console.log(error);
@@ -103,8 +103,19 @@ let batsmanTable = searchTool(".table.batsman");
           let six = searchTool(cols[6]).text();
           let strikeRate = searchTool(cols[7]).text();
         //   console.log(name + " " + run +" " + ball+" " + fours+" " +six+ " " + strikeRate);
-         let info = [name,run,ball,fours,six,strikeRate];
-         let jsoninfo = JSON.stringify(info);
+         let info = {
+         "name": name,
+         "run":run,
+         "ball":ball,
+         "fours":fours,
+         "six":six,
+         "strikeRate": strikeRate
+        }
+      let array = [];
+      array.push(info);
+            
+
+         let jsoninfo = JSON.stringify(array);
           let playerInfo = path.join(teamPath,name + ".json");
           let playerAlready = fs.existsSync(playerInfo);
            
